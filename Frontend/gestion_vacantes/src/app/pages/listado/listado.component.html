@@ -1,0 +1,64 @@
+<div class="container">
+
+    <!-- Empresas -->
+    <section>
+      <h2>Empresas</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>CIF</th>
+            <th>Nombre</th>
+            <th>Dirección Fiscal</th>
+            <th>País</th>
+            <th>Email del Usuario</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (empresa of arrEmpresas; track empresa.idEmpresa) {
+            <tr>
+              <td>{{ empresa.idEmpresa }}</td>
+              <td>{{ empresa.cif }}</td>
+              <td>{{ empresa.nombreEmpresa }}</td>
+              <td>{{ empresa.direccionFiscal }}</td>
+              <td>{{ empresa.pais }}</td>
+              <td>{{ empresa.usuario.email }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  
+    <hr />
+  
+    <!-- Usuarios -->
+    <section>
+      <h2>Usuarios</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Rol</th>
+            <th>Fecha Registro</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of arrUsuarios; track usuario.email) {
+            <tr>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.nombre }}</td>
+              <td>{{ usuario.apellidos }}</td>
+              <td>{{ usuario.rol }}</td>
+              <td>{{ usuario.fechaRegistro }}</td>
+              <td>{{ usuario.enabled === 1 ? 'Activo' : 'Inactivo' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  
+  </div>
+  
