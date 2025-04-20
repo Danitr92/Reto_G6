@@ -9,7 +9,7 @@ import gestion.service.UsuarioService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/usuarios")
 @CrossOrigin(origins = "*")
 public class UsuarioController {
 
