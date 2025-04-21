@@ -1,0 +1,27 @@
+<section>
+    <h2>Empresas</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>CIF</th>
+          <th>Nombre</th>
+          <th>Dirección Fiscal</th>
+          <th>País</th>
+          <th>Email del Usuario</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (empresa of arrEmpresas; track empresa.idEmpresa) {
+          <tr>
+            <td>{{ empresa.idEmpresa }}</td>
+            <td>{{ empresa.cif }}</td>
+            <td>{{ empresa.nombreEmpresa }}</td>
+            <td>{{ empresa.direccionFiscal }}</td>
+            <td>{{ empresa.pais }}</td>
+            <td>{{ empresa.usuario.email }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>

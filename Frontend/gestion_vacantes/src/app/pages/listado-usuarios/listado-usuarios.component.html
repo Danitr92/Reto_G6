@@ -1,0 +1,27 @@
+<section>
+    <h2>Usuarios</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Nombre</th>
+          <th>Apellidos</th>
+          <th>Rol</th>
+          <th>Fecha Registro</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (usuario of arrUsuarios; track usuario.email) {
+          <tr>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.apellidos }}</td>
+            <td>{{ usuario.rol }}</td>
+            <td>{{ usuario.fechaRegistro }}</td>
+            <td>{{ usuario.enabled === 1 ? 'Activo' : 'Inactivo' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>

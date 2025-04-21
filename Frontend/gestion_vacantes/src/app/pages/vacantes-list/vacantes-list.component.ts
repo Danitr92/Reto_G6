@@ -16,8 +16,9 @@ export class VacantesListComponent {
 
   async ngOnInit(): Promise<void> {
     try {
-      this.arrVacantes = await this.vacService.getAllWithPromises();
-      console.log('arrVacantes:', this.arrVacantes);
+      const todasLasVacantes = await this.vacService.getAllWithPromises();
+      // Filtrar vacantes activas (las no canceladas)
+      this.arrVacantes = todasLasVacantes.filter((v: Vacante) => v.estatus !== 'CANCELADA');
     }
     catch (err) {
       console.log('Error al conectar a la API: '+err)

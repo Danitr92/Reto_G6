@@ -5,16 +5,16 @@
               <i [routerLink]="['/vacante', idVacante]" class="bi bi-search pointer"></i>
             </div>    
             <div class="text-center">
-              <i [routerLink]="['/editar','vacante', idVacante]" class="bi bi-pencil"></i>
+              <i [routerLink]="['/editar','vacante', idVacante]" class="bi bi-pencil pointer"></i>
             </div>
             <div class="text-center">
-              <i class="bi bi-trash pointer"></i>
+              <i class="bi bi-x-lg pointer" (click)="cancelarVacante(idVacante)"></i>
             </div>
           </div>
     }
     @else if(parent == 'view'){
     <a [routerLink]="['/vacantes']" class="btn btn-dark"> Volver</a>
     <a [routerLink]="['/editar','vacante', idVacante]" class="btn btn-dark">Editar</a>
-    <button class="btn btn-dark">Cancelar</button>
+    <button class="btn btn-dark" (click)="cancelarVacante(idVacante)">Cancelar</button>
     }
 </div>
