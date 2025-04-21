@@ -1,0 +1,38 @@
+<section class="d-flex justify-content-center mt-4">
+    <div class="card shadow-lg p-4" style="max-width: 800px; width: 100%;">
+      <div class="row g-4">
+        
+        <div class="col-md-4 text-center">
+          <img [src]="miVacante.imagen" class="img-fluid rounded mb-2 border border-2" alt="Imagen de la vacante">
+          <p class="badge bg-secondary mt-2" *ngIf="miVacante.destacado">Vacante destacada</p>
+        </div>
+        
+        <div class="col-md-8">
+          <h4 class="mb-3 text-dark">{{ miVacante.nombre }}</h4>
+          
+          <p><strong>Descripción:</strong> {{ miVacante.descripcion }}</p>
+          <p><strong>Detalles:</strong> {{ miVacante.detalles }}</p>
+          <p><strong>Fecha de incorporación:</strong> {{ miVacante.fecha }}</p>
+          <p><strong>Salario:</strong> {{ miVacante.salario}}</p>
+          <p><strong>Estado: </strong> 
+            <span class="badge" [ngClass]="{
+              'bg-success': miVacante.estatus === 'CREADA',
+              'bg-warning': miVacante.estatus === 'CUBIERTA',
+              'bg-danger': miVacante.estatus === 'CANCELADA'
+            }">
+              {{ miVacante.estatus }}
+            </span>
+          </p>
+  
+          <p><strong>Categoría:</strong> {{ miVacante.categoria.nombre }}</p>
+          <p><strong>Empresa:</strong> {{ miVacante.empresa.nombreEmpresa }}</p>
+          <p><strong>País:</strong> {{ miVacante.empresa.pais }}</p>
+        </div>
+  
+        <div class="col-12 text-center mt-3">
+          <app-botonera [parent]="'view'" [idVacante]="miVacante.idVacante"></app-botonera>
+        </div>
+      </div>
+    </div>
+  </section>
+  
