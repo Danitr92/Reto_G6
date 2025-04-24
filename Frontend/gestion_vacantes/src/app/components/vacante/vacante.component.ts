@@ -11,4 +11,5 @@ import { BotoneraComponent } from '../botonera/botonera.component';
 export class VacanteComponent {
 
   @Input() miVacante!: Vacante;
+  
 }

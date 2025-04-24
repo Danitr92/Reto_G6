@@ -14,4 +14,5 @@ public class UsuarioDto {
     private Rol rol;
     private LocalDate fechaRegistro;
     private int enabled;
+    
 }

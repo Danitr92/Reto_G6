@@ -14,7 +14,7 @@ export class VacantesService {
   httpClient = inject(HttpClient);
   private baseUrl : string = 'http://localhost:8086/vacantes';
 
-  constructor() { }
+  constructor() {}
 
   getAllWithPromises(): Promise<any> {
     return lastValueFrom(this.httpClient.get<{ results: Vacante[] }>(this.baseUrl));

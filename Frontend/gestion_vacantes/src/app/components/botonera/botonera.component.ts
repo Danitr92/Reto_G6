@@ -23,7 +23,6 @@ export class BotoneraComponent {
     this.parent = "";
   }
 
-
   async cancelarVacante(idVacante: number) {
     const { isConfirmed } = await Swal.fire({
       title: '¿Está seguro de que quiere cancelar esta vacante?',

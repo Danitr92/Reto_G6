@@ -37,6 +37,7 @@ public class VacanteController {
         return vacanteService.update(vacante);
     }
 
+    
     // no se puede porque es fk de la tabla solicitud
     @DeleteMapping("/{id}")
     public void eliminarVacante(@PathVariable Integer id) {

@@ -8,6 +8,7 @@ import { ListadoEmpresasComponent } from './pages/listado-empresas/listado-empre
 import { ListadoUsuariosComponent } from './pages/listado-usuarios/listado-usuarios.component';
 
 export const routes: Routes = [
+    
     { path: "", pathMatch: "full", redirectTo: "login"},
     { path: "listado/empresas", component: ListadoEmpresasComponent},
     { path: "listado/usuarios", component: ListadoUsuariosComponent},
@@ -17,4 +18,5 @@ export const routes: Routes = [
     { path: "nueva/vacante", component: VacanteFormComponent},
     { path: "vacante/:idVacante", component: VacanteDetalleComponent},
     {path: "**", redirectTo: "login"}
+
 ];
