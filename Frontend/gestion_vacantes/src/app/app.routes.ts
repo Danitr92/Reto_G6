@@ -1,22 +1,55 @@
 import { Routes } from '@angular/router';
-import { ListadoComponent } from './pages/listado/listado.component';
-import { LoginComponent } from './pages/login/login.component';
-import { VacantesListComponent } from './pages/vacantes-list/vacantes-list.component';
-import { VacanteDetalleComponent } from './pages/vacante-detalle/vacante-detalle.component';
-import { VacanteFormComponent } from './pages/vacante-form/vacante-form.component';
-import { ListadoEmpresasComponent } from './pages/listado-empresas/listado-empresas.component';
-import { ListadoUsuariosComponent } from './pages/listado-usuarios/listado-usuarios.component';
+import { authGuard } from './guards/auth.guard';
+import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = [
-    
-    { path: "", pathMatch: "full", redirectTo: "login"},
-    { path: "listado/empresas", component: ListadoEmpresasComponent},
-    { path: "listado/usuarios", component: ListadoUsuariosComponent},
-    { path: "login", component: LoginComponent},
-    { path: "vacantes", component: VacantesListComponent},
-    { path: "editar/vacante/:idVacante", component: VacanteFormComponent},
-    { path: "nueva/vacante", component: VacanteFormComponent},
-    { path: "vacante/:idVacante", component: VacanteDetalleComponent},
-    {path: "**", redirectTo: "login"}
+  // Público
+  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { 
+    path: 'login', 
+    loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) 
+  },
 
+  // Listados (Admin)
+  { 
+    path: 'listado/empresas', 
+    loadComponent: () => import('./pages/listado-empresas/listado-empresas.component').then(m => m.ListadoEmpresasComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'ADMON' } 
+  },
+  { 
+    path: 'listado/usuarios', 
+    loadComponent: () => import('./pages/listado-usuarios/listado-usuarios.component').then(m => m.ListadoUsuariosComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'ADMON' } 
+  },
+
+  // Vacantes (Compartido)
+  { 
+    path: 'vacantes', 
+    loadComponent: () => import('./pages/vacantes-list/vacantes-list.component').then(m => m.VacantesListComponent),
+    canActivate: [authGuard] 
+  },
+  { 
+    path: 'vacante/:idVacante', 
+    loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent),
+    canActivate: [authGuard] 
+  },
+
+  // Formularios (Empresa)
+  { 
+    path: 'editar/vacante/:idVacante', 
+    loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' } 
+  },
+  { 
+    path: 'nueva/vacante', 
+    loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' } 
+  },
+
+  // Redirección para rutas no encontradas
+  { path: '**', redirectTo: 'login' }
 ];

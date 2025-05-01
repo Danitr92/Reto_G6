@@ -1,0 +1,50 @@
+import { Injectable, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
+import { Usuario } from '../interfaces/usuario';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AuthService {
+  private http = inject(HttpClient);
+  private router = inject(Router);
+  private apiUrl = 'http://localhost:8086/usuarios';
+
+  login(email: string, password: string) {
+    return this.http.get<Usuario>(`${this.apiUrl}/${email}`).pipe(
+      tap(usuario => {
+        if (usuario && usuario.password === password && usuario.enabled === 1) {
+          localStorage.setItem('currentUser', JSON.stringify(usuario));
+          console.log('Usuario logueado:', usuario);
+          // Redirigir según rol
+          switch(usuario.rol) {
+            case 'ADMON': this.router.navigate(['/admin/empresas']); break;
+            case 'EMPRESA': this.router.navigate(['/empresa/vacantes']); break;
+            case 'CLIENTE': this.router.navigate(['/cliente/vacantes']); break;
+          }
+        }
+      })
+    );
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return !!localStorage.getItem('currentUser');
+  }
+
+  getCurrentUser(): Usuario | null {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  }
+
+  getUserRole(): string | null {
+    const user = this.getCurrentUser();
+    return user ? user.rol : null;
+  }
+}
