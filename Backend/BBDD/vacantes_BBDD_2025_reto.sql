@@ -17,7 +17,7 @@ CREATE TABLE `Usuarios` (
   enabled int NOT NULL DEFAULT 1,
   fecha_Registro date,
   rol varchar(15) not null,
-  CHECK(ROL IN ('EMPRESA', 'ADMON', 'CLIENTE'))
+  CHECK(ROL IN ('EMPRESA', 'ADMIN', 'CLIENTE'))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

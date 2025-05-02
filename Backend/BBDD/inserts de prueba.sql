@@ -8,7 +8,7 @@ INSERT INTO Categorias (nombre, descripcion) VALUES
 INSERT INTO Usuarios (email, nombre, apellidos, password, enabled, fecha_Registro, rol) VALUES
 ('empresa1@correo.com', 'Carlos', 'López García', 'pass1234', 1, '2025-01-15', 'EMPRESA'),
 ('empresa2@correo.com', 'Laura', 'Pérez Díaz', 'pass5678', 1, '2025-01-20', 'EMPRESA'),
-('admin@admin.com', 'Admin', 'Root', 'adminpass', 1, '2025-01-01', 'ADMON'),
+('admin@admin.com', 'Admin', 'Root', 'adminpass', 1, '2025-01-01', 'ADMIN'),
 ('cliente1@correo.com', 'Ana', 'Martínez Ruiz', 'clientepass1', 1, '2025-02-05', 'CLIENTE'),
 ('cliente2@correo.com', 'David', 'Sánchez Torres', 'clientepass2', 1, '2025-02-07', 'CLIENTE');
 

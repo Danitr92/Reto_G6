@@ -36,6 +36,6 @@ public class Usuario {
     private Rol rol;
 
     public enum Rol {
-        EMPRESA, ADMON, CLIENTE
+        EMPRESA, ADMIN, CLIENTE
     }
 }
