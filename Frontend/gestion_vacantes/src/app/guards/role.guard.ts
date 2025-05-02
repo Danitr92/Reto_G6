@@ -15,7 +15,7 @@ export const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   
   // Redirigir al dashboard según su rol si intenta acceder a ruta no permitida
   switch(userRole) {
-    case 'ADMON': router.navigate(['/admin/empresas']); break;
+    case 'ADMIN': router.navigate(['/admin/empresas']); break;
     case 'EMPRESA': router.navigate(['/empresa/vacantes']); break;
     case 'CLIENTE': router.navigate(['/cliente/vacantes']); break;
     default: router.navigate(['/login']);

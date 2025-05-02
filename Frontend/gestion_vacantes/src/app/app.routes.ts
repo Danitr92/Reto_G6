@@ -16,20 +16,20 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin/admin-dashboard/admin-dashboard.component')
       .then(m => m.AdminDashboardComponent),
     canActivate: [authGuard, roleGuard],
-    data: { role: 'ADMON' }
+    data: { role: 'ADMIN' }
   },
   
   { 
     path: 'listado/empresas', 
     loadComponent: () => import('./pages/listado-empresas/listado-empresas.component').then(m => m.ListadoEmpresasComponent),
     canActivate: [authGuard, roleGuard],
-    data: { role: 'ADMON' } 
+    data: { role: 'ADMIN' } 
   },
   { 
     path: 'listado/usuarios', 
     loadComponent: () => import('./pages/listado-usuarios/listado-usuarios.component').then(m => m.ListadoUsuariosComponent),
     canActivate: [authGuard, roleGuard],
-    data: { role: 'ADMON' } 
+    data: { role: 'ADMIN' } 
   },
 
   // Vacantes (Compartido)

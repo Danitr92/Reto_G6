@@ -5,5 +5,5 @@ export interface Usuario {
   password: string,
   enabled: number,
   fechaRegistro: string,
-  rol: 'ADMON' | 'EMPRESA' | 'CLIENTE';
+  rol: 'ADMIN' | 'EMPRESA' | 'CLIENTE';
 }
