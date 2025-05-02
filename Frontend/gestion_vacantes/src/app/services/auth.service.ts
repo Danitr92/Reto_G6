@@ -21,7 +21,7 @@ export class AuthService {
         
         if (usuario && usuario.password === password && usuario.enabled === 1) {
           localStorage.setItem('currentUser', JSON.stringify(usuario));
-          this.authChanged.emit(); // Avisa al nabvar que hubo cambios
+          this.authChanged.emit(); // Avisa al nav que hubo cambios
           console.log('Usuario logueado:', usuario);
           // Redirigir según rol
           switch(usuario.rol) {
@@ -37,7 +37,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('currentUser');
     this.router.navigate(['/login']);
-    this.authChanged.emit();  // Avisa al nabvar que hubo cambios
+    this.authChanged.emit();  // Avisa al nav que hubo cambios
   }
 
   isLoggedIn(): boolean {

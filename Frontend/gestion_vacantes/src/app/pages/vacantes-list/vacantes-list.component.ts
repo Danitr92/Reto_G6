@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { Vacante } from '../../interfaces/vacante';
 import { VacantesService } from '../../services/vacantes.service';
 import { VacanteComponent } from "../../components/vacante/vacante.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-vacantes-list',
-  imports: [VacanteComponent],
+  imports: [VacanteComponent, RouterLink],
   templateUrl: './vacantes-list.component.html',
   styleUrl: './vacantes-list.component.css'
 })

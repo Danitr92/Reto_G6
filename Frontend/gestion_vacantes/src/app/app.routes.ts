@@ -46,11 +46,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/vacantes-list/vacantes-list.component').then(m => m.VacantesListComponent),
     canActivate: [authGuard] 
   },
-  { 
-    path: 'vacante/:idVacante', 
-    loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent),
-    canActivate: [authGuard] 
-  },
 
   // Formularios (Empresa)
   {
@@ -68,7 +63,7 @@ export const routes: Routes = [
     data: { role: 'EMPRESA' } 
   },
   { 
-    path: 'nueva/vacante', 
+    path: 'vacante/nueva', 
     loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
     canActivate: [authGuard, roleGuard],
     data: { role: 'EMPRESA' } 
