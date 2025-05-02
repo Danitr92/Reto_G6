@@ -33,6 +33,14 @@ export const routes: Routes = [
   },
 
   // Vacantes (Compartido)
+  {
+    path: 'usuario',
+    loadComponent: () =>
+      import('./pages/usuario/usuario-dashboard/usuario-dashboard.component')
+        .then(m => m.UsuarioDashboardComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'CLIENTE' }
+  },
   { 
     path: 'vacantes', 
     loadComponent: () => import('./pages/vacantes-list/vacantes-list.component').then(m => m.VacantesListComponent),
@@ -45,6 +53,14 @@ export const routes: Routes = [
   },
 
   // Formularios (Empresa)
+  {
+    path: 'empresa',
+    loadComponent: () =>
+      import('./pages/empresa/empresa-dashboard/empresa-dashboard.component')
+        .then(m => m.EmpresaDashboardComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' }
+  },
   { 
     path: 'editar/vacante/:idVacante', 
     loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),

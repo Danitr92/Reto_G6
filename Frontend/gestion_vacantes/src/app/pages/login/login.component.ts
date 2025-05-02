@@ -22,6 +22,7 @@ export class LoginComponent {
     private authService: AuthService,
     private router: Router,
     private http: HttpClient 
+
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -39,7 +40,6 @@ export class LoginComponent {
           const role = this.authService.getUserRole();
           if (role === 'ADMON') {
             this.router.navigate(['admin/dashboard']);
-            console.log('Redirigiendo a admin...');
           } else if (role === 'EMPRESA') {
             this.router.navigate(['/empresa']);
           } else {
