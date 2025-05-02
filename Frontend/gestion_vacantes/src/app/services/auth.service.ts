@@ -15,6 +15,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http.get<Usuario>(`${this.apiUrl}/${email}`).pipe(
       tap(usuario => {
+        
         if (usuario && usuario.password === password && usuario.enabled === 1) {
           localStorage.setItem('currentUser', JSON.stringify(usuario));
           console.log('Usuario logueado:', usuario);

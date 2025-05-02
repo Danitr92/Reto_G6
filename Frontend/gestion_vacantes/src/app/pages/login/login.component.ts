@@ -38,7 +38,8 @@ export class LoginComponent {
           // Redirigir según el rol del usuario
           const role = this.authService.getUserRole();
           if (role === 'ADMON') {
-            this.router.navigate(['/admin']);
+            this.router.navigate(['admin/dashboard']);
+            console.log('Redirigiendo a admin...');
           } else if (role === 'EMPRESA') {
             this.router.navigate(['/empresa']);
           } else {

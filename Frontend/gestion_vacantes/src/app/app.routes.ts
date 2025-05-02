@@ -11,6 +11,14 @@ export const routes: Routes = [
   },
 
   // Listados (Admin)
+  {
+    path: 'admin/dashboard',
+    loadComponent: () => import('./pages/admin/admin-dashboard/admin-dashboard.component')
+      .then(m => m.AdminDashboardComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'ADMON' }
+  },
+  
   { 
     path: 'listado/empresas', 
     loadComponent: () => import('./pages/listado-empresas/listado-empresas.component').then(m => m.ListadoEmpresasComponent),
