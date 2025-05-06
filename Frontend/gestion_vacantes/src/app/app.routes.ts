@@ -46,6 +46,11 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/vacantes-list/vacantes-list.component').then(m => m.VacantesListComponent),
     canActivate: [authGuard] 
   },
+  { 
+    path: 'vacante/:idVacante', 
+    loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent),
+    canActivate: [authGuard] 
+  },
 
   // Formularios (Empresa)
   {
