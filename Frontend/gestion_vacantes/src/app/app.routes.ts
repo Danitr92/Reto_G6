@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
+import { VacanteDetalleComponent } from './pages/vacante-detalle/vacante-detalle.component';
 
 export const routes: Routes = [
   // Público
@@ -47,6 +48,12 @@ export const routes: Routes = [
     canActivate: [authGuard] 
   },
   { 
+    path: 'vacante/nueva', 
+    loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' } 
+  },
+  { 
     path: 'vacante/:idVacante', 
     loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent),
     canActivate: [authGuard] 
@@ -61,19 +68,15 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { role: 'EMPRESA' }
   },
+  
   { 
     path: 'editar/vacante/:idVacante', 
     loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
     canActivate: [authGuard, roleGuard],
     data: { role: 'EMPRESA' } 
   },
-  { 
-    path: 'vacante/nueva', 
-    loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
-    canActivate: [authGuard, roleGuard],
-    data: { role: 'EMPRESA' } 
-  },
-
+  
+  
   // Redirección para rutas no encontradas
   { path: '**', redirectTo: 'login' }
 ];
