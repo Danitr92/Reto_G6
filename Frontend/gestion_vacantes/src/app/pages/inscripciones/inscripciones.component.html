@@ -1,0 +1,33 @@
+<div class="inscripciones-container">
+    <h2 class="text-center my-4">Inscripciones a la vacante</h2>
+  
+    <div *ngIf="inscripciones.length > 0; else noInscripciones">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th>Vacante</th>
+            <th>Fecha</th>
+            <th>Usuario</th>
+            <th>Comentarios</th>
+            <th>Estado</th>
+            <th>Currículum</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let inscripcion of inscripciones">
+            <td>{{ inscripcion.vacante.nombre || 'Sin nombre' }}</td>
+            <td>{{ inscripcion.fecha }}</td>
+            <td>{{ inscripcion.usuario.email }}</td>
+            <td>{{ inscripcion.comentarios || 'Ninguno' }}</td>
+            <td>{{ inscripcion.estado ? 'Adjudicada' : 'Presentada' }}</td>
+            <td><a [href]="inscripcion.curriculum" target="_blank" class="btn btn-dark btn-sm">Ver Currículum</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #noInscripciones>
+      <p class="text-center text-muted">No hay inscripciones para esta vacante.</p>
+    </ng-template>
+  </div>
+  

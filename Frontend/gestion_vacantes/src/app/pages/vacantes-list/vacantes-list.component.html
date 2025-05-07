@@ -1,6 +1,6 @@
 <div class="container mt-3 mb-5">
     <h3 class="text-center mb-4">Listado de vacantes</h3>
-    <a routerLink="/vacante/nueva" class="btn btn-dark">
+    <a *ngIf="role === 'EMPRESA'" routerLink="/vacante/nueva" class="btn btn-dark">
       <i class="bi bi-plus-circle"></i> Nueva Vacante
   </a>
     <hr>

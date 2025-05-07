@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import gestion.entity.Solicitud;
+import gestion.repository.SolicitudRepository;
 import gestion.service.SolicitudService;
 
 import java.util.List;
@@ -40,5 +41,10 @@ public class SolicitudController {
     @DeleteMapping("/{id}")
     public void eliminarSolicitud(@PathVariable Integer id) {
         solicitudService.delete(id);
+    }
+    
+    @GetMapping("/existe")
+    public boolean existeSolicitud(@RequestParam int idVacante, @RequestParam String email) {
+        return solicitudService.existsByVacanteIdVacanteAndUsuarioEmail(idVacante, email);
     }
 }

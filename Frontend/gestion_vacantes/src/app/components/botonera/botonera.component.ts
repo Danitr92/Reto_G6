@@ -2,25 +2,39 @@ import { Component, inject, Input } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { VacantesService } from '../../services/vacantes.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common';
+import { SolicitudService } from '../../services/solicitude.service';
+import { formatDate } from '@angular/common';
+import { Usuario } from '../../interfaces/usuario';
+import { Solicitud } from '../../interfaces/solicitud';
+import { Vacante } from '../../interfaces/vacante';
 
 @Component({
   selector: 'app-botonera',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './botonera.component.html',
   styleUrl: './botonera.component.css'
 })
 export class BotoneraComponent {
 
+  solicitudService = inject(SolicitudService);
   vacService = inject(VacantesService);
+  authService = inject(AuthService);
   router = inject(Router);
 
   @Input() idVacante: number;
   @Input() parent: string;
 
+  role: string = '';
+
 
   constructor() {
     this.idVacante = 0;
     this.parent = "";
+
+    const userRole = this.authService.getUserRole();
+    this.role = userRole ? userRole : '';
   }
 
   async cancelarVacante(idVacante: number) {
@@ -61,5 +75,53 @@ export class BotoneraComponent {
       }
     }
   }
+
+
+  
+  async inscribirse() {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser) {
+      Swal.fire('Error', 'Debes iniciar sesión para inscribirte.', 'error');
+      return;
+    }
+  
+    const yaExiste = await this.solicitudService.existeSolicitud(this.idVacante, currentUser.email);
+  
+    if (yaExiste) {
+      Swal.fire('Ya inscrito', 'Ya estás inscrito en esta vacante.', 'info');
+      return;
+    }
+  
+    const { isConfirmed } = await Swal.fire({
+      title: '¿Quieres inscribirte en esta vacante?',
+      text: 'Tu currículum será enviado a la empresa.',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, inscribirme',
+      cancelButtonText: 'No'
+    });
+  
+    if (isConfirmed) {
+      const solicitud: Solicitud = {
+        fecha: new Date().toISOString().split('T')[0],
+        archivo: 'documento.pdf', // Puedes cambiar esto si subes un archivo real
+        comentarios: '',
+        estado: false,
+        curriculum: 'cv_cliente.pdf',
+        vacante: { idVacante: this.idVacante } as Vacante,
+        usuario: { email: currentUser.email } as Usuario // Aquí es donde se corrige
+      };
+  
+      try {
+        await this.solicitudService.crearSolicitud(solicitud);
+        Swal.fire('Éxito', 'Te has inscrito correctamente.', 'success');
+      } catch (err) {
+        Swal.fire('Error', 'Ocurrió un error al inscribirte.', 'error');
+      }
+    }
+  }
+  
+
+
   
 }

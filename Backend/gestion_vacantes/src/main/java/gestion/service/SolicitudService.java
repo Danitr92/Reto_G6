@@ -10,4 +10,5 @@ public interface SolicitudService {
     Solicitud save(Solicitud solicitud);
     Solicitud update(Solicitud solicitud);
     void delete(Integer id);
+    boolean existsByVacanteIdVacanteAndUsuarioEmail(int idVacante, String email);
 }

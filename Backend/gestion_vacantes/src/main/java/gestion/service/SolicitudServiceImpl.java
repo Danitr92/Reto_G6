@@ -38,4 +38,9 @@ public class SolicitudServiceImpl implements SolicitudService {
     public void delete(Integer id) {
         solicitudRepository.deleteById(id);
     }
+    
+    @Override
+    public boolean existsByVacanteIdVacanteAndUsuarioEmail(int idVacante, String email) {
+        return solicitudRepository.existsByVacanteIdVacanteAndUsuarioEmail(idVacante, email);
+    }
 }

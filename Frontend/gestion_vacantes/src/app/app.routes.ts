@@ -58,6 +58,12 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent),
     canActivate: [authGuard] 
   },
+  { 
+    path: 'inscripciones', 
+    loadComponent: () => import('./pages/inscripciones/inscripciones.component').then(m => m.InscripcionesComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' } 
+  },
 
   // Formularios (Empresa)
   {

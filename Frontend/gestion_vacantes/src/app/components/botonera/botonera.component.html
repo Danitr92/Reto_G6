@@ -1,20 +1,24 @@
 <div class="d-flex gap-2 justify-content-center">
     @if(parent == 'card'){
         <div class="d-flex gap-4">
+          <div class="text-center">
+            <i *ngIf="role === 'CLIENTE'" [routerLink]="[]" class="bi bi-file-earmark-person pointer" title="Inscribirse" (click)="inscribirse()"></i>
+          </div>  
             <div class="text-center">
-              <i [routerLink]="['/vacante', idVacante]" class="bi bi-search pointer"></i>
+              <i [routerLink]="['/vacante', idVacante]" class="bi bi-search pointer" title="Detalles"></i>
             </div>    
             <div class="text-center">
-              <i [routerLink]="['/editar','vacante', idVacante]" class="bi bi-pencil pointer"></i>
+              <i *ngIf="role === 'EMPRESA'" [routerLink]="['/editar','vacante', idVacante]" class="bi bi-pencil pointer" title="Editar"></i>
             </div>
             <div class="text-center">
-              <i class="bi bi-x-lg pointer" (click)="cancelarVacante(idVacante)"></i>
+              <i *ngIf="role === 'ADMIN' || role === 'EMPRESA'"  class="bi bi-x-lg pointer" (click)="cancelarVacante(idVacante)" title="Cancelar"></i>
             </div>
           </div>
     }
     @else if(parent == 'view'){
+    <a *ngIf="role === 'CLIENTE'" [routerLink]="[]" class="btn btn-dark" (click)="inscribirse()">Inscribirse</a>
     <a [routerLink]="['/vacantes']" class="btn btn-dark"> Volver</a>
-    <a [routerLink]="['/editar','vacante', idVacante]" class="btn btn-dark">Editar</a>
-    <button class="btn btn-dark" (click)="cancelarVacante(idVacante)">Cancelar</button>
+    <a *ngIf="role === 'EMPRESA'" [routerLink]="['/editar','vacante', idVacante]" class="btn btn-dark">Editar</a>
+    <button class="btn btn-dark" *ngIf="role === 'ADMIN' || role === 'EMPRESA'" (click)="cancelarVacante(idVacante)">Cancelar</button>
     }
 </div>
