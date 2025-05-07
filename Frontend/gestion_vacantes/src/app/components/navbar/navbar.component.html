@@ -1,7 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark pr-3 py-2">
   <div class="container-fluid">
-    <a class="navbar-brand" [routerLink]="['/']">
-      <i class="bi bi-people"></i>
+    <a class="navbar-brand me-3" [routerLink]="['/']">
+      <i class="bi bi-people fs-4"></i> Portal de Empleo
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,49 +9,97 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-center">
 
-        <li class="nav-item dropdown">
-          
-          <a class="nav-link dropdown-toggle" href="#" id="vacantesDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Participantes
+        <!-- Opción pública para todos -->
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/']" 
+             routerLinkActive="active">
+            <i class="bi me-1 "></i> Inicio
           </a>
-          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="vacantesDropdown">
-            <li>
-              <a class="dropdown-item" [routerLink]="['/listado/empresas']">Empresas</a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/listado/usuarios']">Usuarios</a>
-            </li>
-          </ul>
-        </li>
-        
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="vacantesDropdown" role="button"
-            data-bs-toggle="dropdown" aria-expanded="false">
-            Vacantes
-          </a>
-          <ul class="dropdown-menu dropdown-menu-dark dropdown-menu-end" aria-labelledby="vacantesDropdown">
-            <li>
-              <a class="dropdown-item" [routerLink]="['/vacantes']">Listado de vacantes</a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/vacante/nueva']">Nueva vacante</a>
-            </li>
-            <li>
-              <a class="dropdown-item" [routerLink]="['/inscripciones']">Inscripciones</a>
-            </li>
-          </ul>
         </li>
 
-        <li class="nav-item">
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/vacantes']" 
+             routerLinkActive="active">
+            <i class="bi bi-search me-1 "></i> Buscar vacantes
+          </a>
+        </li>
+
+        <!-- Opciones para ADMIN -->
+        @if (isLoggedIn() && rol === 'ADMIN') {
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/admin/dashboard']" 
+             routerLinkActive="active">
+            <i class="bi bi-speedometer2 me-1"></i> Dashboard
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/listado/empresas']" 
+             routerLinkActive="active">
+            <i class="bi bi-building me-1"></i> Empresas
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/listado/usuarios']" 
+             routerLinkActive="active">
+            <i class="bi bi-people-fill me-1"></i> Usuarios
+          </a>
+        </li>
+        }
+
+        <!-- Opciones para EMPRESA -->
+        @if (isLoggedIn() && rol === 'EMPRESA') {
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/empresa']" 
+             routerLinkActive="active">
+            <i class="bi bi-house me-1"></i> Inicio
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/vacante/nueva']" 
+             routerLinkActive="active">
+            <i class="bi bi-plus-circle me-1"></i> Publicar Vacante
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/inscripciones']" 
+             routerLinkActive="active">
+            <i class="bi bi-envelope me-1"></i> Inscripciones
+          </a>
+        </li>
+        }
+
+        <!-- Opciones para CLIENTE -->
+        @if (isLoggedIn() && rol === 'CLIENTE') {
+        <li class="nav-item mx-2">
+          <a class="nav-link px-3 py-2 rounded" [routerLink]="['/usuario']" 
+             routerLinkActive="active">
+            <i class="bi bi-house me-1"></i> Mi Perfil
+          </a>
+        </li>
+        }
+
+        <!-- Opciones de autenticación -->
+        <li class="nav-item ms-3">
           @if (!isLoggedIn()) {
-          <a class="nav-link" [routerLink]="['login']" routerLinkActive="active">Login</a>
+          <div class="d-flex gap-2">
+            <a class="btn btn-outline-light btn-sm px-3" [routerLink]="['/login']">
+              <i class="bi bi-box-arrow-in-right me-1"></i> Login
+            </a>
+            <a class="btn btn-primary btn-sm px-3" [routerLink]="['/registro']">
+              <i class="bi bi-person-plus me-1"></i> Registrarse
+            </a>
+          </div>
           } @else {
-          <a class="nav-link" (click)="logout()" routerLinkActive="active">Logout</a>
-          <p class="rol nav-link d-inline">Rol actual: ({{rol}})</p>
+          <div class="d-flex align-items-center gap-3">
+            <span class="text-light small d-none d-md-inline">
+              <i class="bi bi-person-circle me-1"></i> {{rol}}
+            </span>
+            <button class="btn btn-outline-light btn-sm" (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Salir
+            </button>
+          </div>
           }
         </li>
 

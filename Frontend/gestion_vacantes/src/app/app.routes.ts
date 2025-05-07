@@ -1,14 +1,23 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { roleGuard } from './guards/role.guard';
-import { VacanteDetalleComponent } from './pages/vacante-detalle/vacante-detalle.component';
 
 export const routes: Routes = [
+
+
   // Público
-  { path: '', pathMatch: 'full', redirectTo: 'login' },
+  { path: '', pathMatch: 'full', redirectTo: 'vacantes' }, 
   { 
     path: 'login', 
     loadComponent: () => import('./pages/login/login.component').then(m => m.LoginComponent) 
+  },
+  { 
+    path: 'vacantes', 
+    loadComponent: () => import('./pages/vacantes-list/vacantes-list.component').then(m => m.VacantesListComponent)
+  },
+  { 
+    path: 'vacante/:idVacante', 
+    loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent)
   },
 
   // Listados (Admin)
@@ -19,7 +28,6 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { role: 'ADMIN' }
   },
-  
   { 
     path: 'listado/empresas', 
     loadComponent: () => import('./pages/listado-empresas/listado-empresas.component').then(m => m.ListadoEmpresasComponent),
@@ -33,7 +41,7 @@ export const routes: Routes = [
     data: { role: 'ADMIN' } 
   },
 
-  // Vacantes (Compartido)
+  // Usuario
   {
     path: 'usuario',
     loadComponent: () =>
@@ -42,30 +50,8 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { role: 'CLIENTE' }
   },
-  { 
-    path: 'vacantes', 
-    loadComponent: () => import('./pages/vacantes-list/vacantes-list.component').then(m => m.VacantesListComponent),
-    canActivate: [authGuard] 
-  },
-  { 
-    path: 'vacante/nueva', 
-    loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
-    canActivate: [authGuard, roleGuard],
-    data: { role: 'EMPRESA' } 
-  },
-  { 
-    path: 'vacante/:idVacante', 
-    loadComponent: () => import('./pages/vacante-detalle/vacante-detalle.component').then(m => m.VacanteDetalleComponent),
-    canActivate: [authGuard] 
-  },
-  { 
-    path: 'inscripciones', 
-    loadComponent: () => import('./pages/inscripciones/inscripciones.component').then(m => m.InscripcionesComponent),
-    canActivate: [authGuard, roleGuard],
-    data: { role: 'EMPRESA' } 
-  },
 
-  // Formularios (Empresa)
+  // Empresa
   {
     path: 'empresa',
     loadComponent: () =>
@@ -74,15 +60,31 @@ export const routes: Routes = [
     canActivate: [authGuard, roleGuard],
     data: { role: 'EMPRESA' }
   },
-  
+  { 
+    path: 'vacante/nueva', 
+    loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' } 
+  },
   { 
     path: 'editar/vacante/:idVacante', 
     loadComponent: () => import('./pages/vacante-form/vacante-form.component').then(m => m.VacanteFormComponent),
     canActivate: [authGuard, roleGuard],
     data: { role: 'EMPRESA' } 
   },
-  
+  { 
+    path: 'inscripciones', 
+    loadComponent: () => import('./pages/inscripciones/inscripciones.component').then(m => m.InscripcionesComponent),
+    canActivate: [authGuard, roleGuard],
+    data: { role: 'EMPRESA' } 
+  },
+
+  // Registro (público)
+  { 
+    path: 'registro', 
+    loadComponent: () => import('./pages/registro/registro.component').then(m => m.RegistroComponent)
+  },
   
   // Redirección para rutas no encontradas
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'vacantes' } 
 ];
