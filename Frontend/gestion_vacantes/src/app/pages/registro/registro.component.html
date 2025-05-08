@@ -1,1 +1,12 @@
-<p>registro works!</p>
+<form (ngSubmit)="registrar()" #form="ngForm">
+    <input type="email" name="email" [(ngModel)]="usuario.email" placeholder="Email" required>
+    <input type="text" name="nombre" [(ngModel)]="usuario.nombre" placeholder="Nombre" required>
+    <input type="text" name="apellidos" [(ngModel)]="usuario.apellidos" placeholder="Apellidos" required>
+    <input type="password" name="password" [(ngModel)]="usuario.password" placeholder="Contraseña" required>
+    <select name="rol" [(ngModel)]="usuario.rol" required>
+      <option value="CLIENTE">Cliente</option>
+      <option value="EMPRESA">Empresa</option>
+    </select>
+    <button type="submit">Registrarse</button>
+  </form>
+  

@@ -39,4 +39,9 @@ public class EmpresaServiceImpl implements EmpresaService {
     public void delete(Integer id) {
         empresaRepository.deleteById(id);
     }
+    
+    @Override
+    public Empresa findByUsuarioEmail(String email) {
+        return empresaRepository.findByUsuarioEmail(email);
+    }
 }

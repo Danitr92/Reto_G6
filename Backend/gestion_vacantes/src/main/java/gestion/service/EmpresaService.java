@@ -10,4 +10,6 @@ public interface EmpresaService {
     Empresa save(Empresa empresa);
     Empresa update(Empresa empresa);
     void delete(Integer id);
+    Empresa findByUsuarioEmail(String email); 
+
 }

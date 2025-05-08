@@ -7,5 +7,6 @@ import gestion.entity.Empresa;
 public interface EmpresaRepository extends JpaRepository<Empresa, Integer> {
 	
     boolean existsByCif(String cif);
-    
+    Empresa findByUsuarioEmail(String email);
+
 }

@@ -16,4 +16,9 @@ export class UsuarioService {
   getAllWithPromises(): Promise<any> {
     return lastValueFrom(this.httpClient.get<{ results: Usuario[] }>(this.baseUrl));
   }
+
+  crearUsuario(usuario: Usuario): Promise<Usuario> {
+    return lastValueFrom(this.httpClient.post<Usuario>(this.baseUrl, usuario));
+  }
+
 }

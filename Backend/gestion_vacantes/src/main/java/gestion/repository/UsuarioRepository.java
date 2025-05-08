@@ -9,4 +9,7 @@ import gestion.entity.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     @Query("SELECT u FROM Usuario u WHERE u.email = :email")
     Usuario findByEmail(@Param("email") String email);
+    
+    boolean existsByEmail(String email);
+
 }	

@@ -66,7 +66,3 @@ CREATE TABLE `Solicitudes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
-
-
-

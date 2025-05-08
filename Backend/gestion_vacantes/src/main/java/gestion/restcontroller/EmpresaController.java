@@ -41,4 +41,9 @@ public class EmpresaController {
     public void eliminarEmpresa(@PathVariable Integer id) {
         empresaService.delete(id);
     }
+    
+    @GetMapping("/usuario/{email}")
+    public Empresa obtenerEmpresaPorEmailUsuario(@PathVariable String email) {
+        return empresaService.findByUsuarioEmail(email);
+    }
 }

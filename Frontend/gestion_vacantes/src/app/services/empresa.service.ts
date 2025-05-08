@@ -17,4 +17,9 @@ export class EmpresaService {
     return lastValueFrom(this.httpClient.get<{ results: Empresa[] }>(this.baseUrl));
   }
 
+  getByUsuarioEmail(email: string) {
+    return this.httpClient.get<Empresa>(`${this.baseUrl}/usuario/${email}`);
+  }
+  
+
 }

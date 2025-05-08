@@ -5,7 +5,39 @@
     <li>
     <a class="dropdown-item" [routerLink]="['/vacantes']"> Gestión de vacantes</a>
     </li>
-    <li>
-    <a class="dropdown-item" [routerLink]="['/listado/usuarios']">Usuarios</a>
-    </li>
 </ul>
+
+<div class="container mt-4" *ngIf="empresa">
+    <h2 class="mb-3">Panel de Empresa</h2>
+    <table class="table table-bordered table-striped">
+      <tr>
+        <th>ID Empresa</th>
+        <td>{{ empresa.idEmpresa }}</td>
+      </tr>
+      <tr>
+        <th>CIF</th>
+        <td>{{ empresa.cif }}</td>
+      </tr>
+      <tr>
+        <th>Nombre</th>
+        <td>{{ empresa.nombreEmpresa }}</td>
+      </tr>
+      <tr>
+        <th>Dirección Fiscal</th>
+        <td>{{ empresa.direccionFiscal }}</td>
+      </tr>
+      <tr>
+        <th>País</th>
+        <td>{{ empresa.pais }}</td>
+      </tr>
+      <tr>
+        <th>Usuario (email)</th>
+        <td>{{ empresa.usuario.email }}</td>
+      </tr>
+    </table>
+  </div>
+  
+  <div class="container mt-4" *ngIf="!empresa">
+    <div class="alert alert-warning">No se ha podido cargar la información de la empresa.</div>
+  </div>
+  
